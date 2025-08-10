@@ -7,7 +7,7 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
-        <item name="colorSecondary">@color/colorSecondary</item>
+<!--        <item name="colorSecondary">@color/colorSecondary</item>-->
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
 
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
@@ -26,4 +26,5 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 </resources>

@@ -1,6 +1,37 @@
 <resources>
     <string name="app_name">My Tools</string>
     <string name="settings">Settings</string>
-    <string name="back">back</string>
-    <string name="dark_mode">Dark Mode</string>
+    <string name="theme">Theme</string>
+
+    <string-array name="theme_entries">
+        <item>Automatic</item>
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>automatic</item>
+        <item>dark</item>
+        <item>light</item>
+    </string-array>
+
+
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="display">Display</string>
+    <string name="title">title</string>
+    <string name="summary">summary</string>
 </resources>

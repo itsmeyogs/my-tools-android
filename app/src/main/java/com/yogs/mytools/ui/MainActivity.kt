@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityMainBinding
-import com.yogs.mytools.ui.setting.SettingActivity
+import com.yogs.mytools.ui.setting.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
-                val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(intent)
                 true
             }
