@@ -1,4 +1,4 @@
-package com.yogs.mytools.ui
+package com.yogs.mytools.ui.home
 
 import android.content.Intent
 import android.os.Bundle

@@ -3,12 +3,12 @@
 
     <ListPreference
         app:layout="@layout/preference_category_card"
-        app:key="theme_setting"
+        app:key="@string/pref_key_theme"
         app:title="@string/theme"
         app:summary="%s"
         app:entries="@array/theme_entries"
         app:entryValues="@array/theme_values"
-        app:defaultValue="automatic"
+        app:defaultValue="@string/pref_theme_auto"
         app:iconSpaceReserved="false"
         />
 
