@@ -3,14 +3,18 @@
     <style name="Base.Theme.MyTools" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="android:colorBackground">@color/background</item>
 
 
     </style>
 
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">@font/poppins_bold</item>
+<!--        <item name="android:fontFamily">@font/poppins_bold</item>-->
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>

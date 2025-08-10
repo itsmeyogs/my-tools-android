@@ -4,4 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="greenBg">#27AE60</color>
     <color name="offWhite">#FAF9F6</color>
+    
+    
+    <color name="primary">#27AE60</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="background">#FAF9F6</color>
+
 </resources>
