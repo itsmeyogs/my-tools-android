@@ -17,7 +17,10 @@
     <string name="title">title</string>
     <string name="summary">summary</string>
 
+    <string name="message_success_copy_to_clipboard">Success copy to clipboard</string>
 
+
+    <!--    string items tools-->
     <string name="key_screen_resolution_changer">screen_resolution_changer</string>
     <string name="title_screen_resolution_changer">Screen Resolution Changer</string>
     <string name="desc_screen_resolution_changer">Change screen resolution and pixel density (DPI)</string>
@@ -26,8 +29,13 @@
     <string name="title_fh_pw_generator">Wifi FH Password Generator</string>
     <string name="desc_fh_pw_generator">Generate default password for the Fiber Home WiFi</string>
 
+    <string name="key_speed_test">speed_test</string>
+    <string name="title_speed_test">Speed Test</string>
+    <string name="desc_speed_test">Tests the speed, stability, and responsiveness of your internet connection.</string>
+
     <string name="coming_soon">Coming Soon</string>
 
+    <!-- string for screen resolution changer tool   -->
     <string name="resolution_changer">Resolution Changer</string>
     <string name="scr_root">Root</string>
     <string name="src_adb">ADB</string>
@@ -48,7 +56,7 @@
 
     <string name="code_tutorial_give_permission_adb">adb shell pm grant com.yogs.mytools android.permission.WRITE_SECURE_SETTINGS</string>
     <string name="copy_code">Copy Code</string>
-    <string name="message_success_copy_to_clipboard">Success copy to clipboard</string>
+
 
 
 </resources>

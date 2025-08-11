@@ -49,6 +49,9 @@ class HomeActivity : AppCompatActivity() {
                         val intent = Intent(this@HomeActivity, ResolutionChanger::class.java)
                         startActivity(intent)
                     }
+                    getString(R.string.key_speed_test)->{
+                        showToast(getString(R.string.coming_soon))
+                    }
                     getString(R.string.key_fh_pw_generator) -> {
                        showToast(getString(R.string.coming_soon))
                     }

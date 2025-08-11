@@ -16,11 +16,17 @@ object DataProvider{
                 desc = ContextCompat.getString(context, R.string.desc_screen_resolution_changer)
             ),
             Tool(
+                key = ContextCompat.getString(context, R.string.key_speed_test),
+                image = R.drawable.ic_speed_test,
+                title = ContextCompat.getString(context, R.string.title_speed_test),
+                desc = ContextCompat.getString(context, R.string.desc_speed_test)
+            ),
+            Tool(
                 key = ContextCompat.getString(context, R.string.key_fh_pw_generator),
                 image = R.drawable.ic_fh_pw_generator,
                 title = ContextCompat.getString(context, R.string.title_fh_pw_generator),
                 desc = ContextCompat.getString(context, R.string.desc_fh_pw_generator)
-            )
+            ),
         )
 
     }
