@@ -3,7 +3,10 @@ package com.yogs.mytools
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.yogs.mytools.di.appModule
 import com.yogs.mytools.util.ThemeMode
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import java.util.Locale
 
 class MyApplication: Application() {
@@ -18,6 +21,11 @@ class MyApplication: Application() {
         )?.apply {
             val theme = ThemeMode.valueOf(this.uppercase(Locale.US))
             AppCompatDelegate.setDefaultNightMode(theme.value)
+        }
+
+        startKoin{
+            androidContext(this@MyApplication)
+            modules(appModule)
         }
     }
 }

@@ -1,10 +1,8 @@
 package com.yogs.mytools.data.model
 
-import android.graphics.drawable.Drawable
-
 data class Tool(
     val key:String,
-    val image:Drawable,
+    val image:Int,
     val title:String,
     val desc:String,
 )
