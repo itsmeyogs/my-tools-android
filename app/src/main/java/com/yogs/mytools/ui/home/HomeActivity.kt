@@ -4,16 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yogs.mytools.R
 import com.yogs.mytools.data.model.Tool
 import com.yogs.mytools.databinding.ActivityHomeBinding
-import com.yogs.mytools.ui.home.HomeAdapter.OnItemClickCallback
+import com.yogs.mytools.util.HomeAdapter.OnItemClickCallback
 import com.yogs.mytools.ui.resolution_changer.ResolutionChanger
 import com.yogs.mytools.ui.setting.SettingsActivity
+import com.yogs.mytools.util.HomeAdapter
 import com.yogs.mytools.util.showToast
+import com.yogs.mytools.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {

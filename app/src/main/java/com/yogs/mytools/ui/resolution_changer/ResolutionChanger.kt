@@ -1,87 +1,88 @@
 package com.yogs.mytools.ui.resolution_changer
 
-import android.content.pm.PackageManager
-import android.icu.util.Output
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.transition.Visibility
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
 import com.yogs.mytools.util.showToast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.concurrent.FutureTask
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResolutionChanger : AppCompatActivity() {
     private lateinit var binding: ActivityResolutionChangerBinding
+    private val viewModel : ResolutionChangerViewModel by viewModel<ResolutionChangerViewModel>()
+
+    companion object{
+        const val METHOD_ROOT = "root"
+        const val METHOD_ADB = "adb"
+        const val METHOD_NOT_SELECTED = "not_selected_method"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResolutionChangerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setUpAppBar()
 
-        val btnCheckPermission = binding.btnCheckPermission
+        observePermissionStatus()
+        observeSelectedMethod()
 
-        binding.rgWorkingMode.setOnCheckedChangeListener { _, checkedId ->
-            btnCheckPermission.isEnabled = checkedId != -1
+        binding.btnCheckPermission.setOnClickListener {
+            checkPermissionStatus()
         }
 
 
-        btnCheckPermission.setOnClickListener {
-            checkPermission()
+
+    }
+
+    private fun observeSelectedMethod(){
+        binding.rgWorkingMode.setOnCheckedChangeListener { _, checkedId ->
+            if(checkedId != -1){
+                checkPermissionStatus()
+                binding.cardPermissionStatus.visibility = View.VISIBLE
+                binding.btnCheckPermission.visibility = View.VISIBLE
+            }
         }
     }
 
-    private fun checkPermission() {
-        val selectedValue = binding.rgWorkingMode.checkedRadioButtonId
-        when (selectedValue) {
+    private fun checkPermissionStatus(){
+        val selectedOption = binding.rgWorkingMode.checkedRadioButtonId
+        when(selectedOption){
             R.id.rb_working_root -> {
-                lifecycleScope.launch {
-                    val message = withContext(Dispatchers.IO) {
-                        try {
-                            val process = Runtime.getRuntime().exec("su")
-                            process.outputStream.write("id\n".toByteArray())
-                            process.outputStream.flush()
-                            process.outputStream.write("exit\n".toByteArray())
-                            process.outputStream.flush()
-
-                            val output = process.inputStream.bufferedReader().readText().trim()
-                            val error = process.errorStream.bufferedReader().readText().trim()
-                            val exitCode = process.waitFor()
-
-                            when {
-                                output.contains("uid=0") -> "Root granted"
-                                exitCode != 0 -> "Root not granted (exit code: $exitCode)"
-                                error.isNotEmpty() -> "Root not granted: $error"
-                                else -> "Root not granted"
-                            }
-                        } catch (e: Exception) {
-                            "Error: ${e.message}"
-                        }
-                    }
-                    showToast(message)
-                }
+                viewModel.checkPermission(METHOD_ROOT)
+                Log.d("check", "Run working root")
             }
-
             R.id.rb_working_adb -> {
-                val checkPermission = checkSelfPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED
-                if(checkPermission){
-                    showToast("Granted")
-                }else{
-                    showToast("not Granted")
-                }
+                viewModel.checkPermission(METHOD_ADB)
+                Log.d("check", "Run working adb")
             }
-
             else -> {
-                showToast(getString(R.string.please_select_working_mode))
+                viewModel.checkPermission(METHOD_NOT_SELECTED)
             }
         }
+    }
+
+
+    private fun observePermissionStatus(){
+        val tvPermissionStatus = binding.tvPermissionStatus
+
+        viewModel.resultPermissionRoot.observe(this){
+            tvPermissionStatus.text = getStringPermissionStatus(it)
+        }
+
+        viewModel.resultPermissionADB.observe(this){
+            tvPermissionStatus.text = getStringPermissionStatus(it)
+        }
+    }
+
+    private fun getStringPermissionStatus(value: Boolean) : String{
+        val result = if(value) getString(R.string.permission_granted) else getString(R.string.permission_not_granted)
+        Log.d("check result", result)
+        return getString(R.string.permission_status, result)
     }
 
 
