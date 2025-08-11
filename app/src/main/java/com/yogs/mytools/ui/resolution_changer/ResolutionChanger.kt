@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.transition.Visibility
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
 import com.yogs.mytools.util.showToast
@@ -31,8 +30,19 @@ class ResolutionChanger : AppCompatActivity() {
         observePermissionStatus()
         observeSelectedMethod()
 
-        binding.btnCheckPermission.setOnClickListener {
-            checkPermissionStatus()
+        binding.btnCheckOrNext.setOnClickListener {
+            val idMethodWorking = binding.rgWorkingMode.checkedRadioButtonId
+            when(idMethodWorking){
+                R.id.rb_working_root -> {
+                    checkPermissionStatus(idMethodWorking)
+                }
+                R.id.rb_working_adb -> {
+                    showToast("next clicked")
+                }
+                else -> {
+                    showToast(METHOD_NOT_SELECTED)
+                }
+            }
         }
 
 
@@ -42,8 +52,9 @@ class ResolutionChanger : AppCompatActivity() {
     private fun observeSelectedMethod(){
         binding.rgWorkingMode.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId != -1){
-                checkPermissionStatus()
+                checkPermissionStatus(checkedId)
                 binding.cardPermissionStatus.visibility = View.VISIBLE
+                binding.btnCheckOrNext.visibility = View.VISIBLE
             }
             manageVisibility(checkedId)
         }
@@ -55,42 +66,35 @@ class ResolutionChanger : AppCompatActivity() {
         val statusPermissionADB = viewModel.resultPermissionADB.value
 
         val cardTutorialGivePermissionADB = binding.cardTutorialGivePermissionAdb
-        val btnCheckPermission = binding.btnCheckPermission
-        val btnNext = binding.btnNext
+        val btnCheckOrNext = binding.btnCheckOrNext
 
         when(idMethodWorking){
             R.id.rb_working_root -> {
                 cardTutorialGivePermissionADB.visibility = View.GONE
                 if(statusPermissionRoot == true){
-                    btnCheckPermission.visibility = View.GONE
-                    btnNext.visibility = View.VISIBLE
+                    btnCheckOrNext.text = getString(R.string.next)
                 }else{
-                    btnCheckPermission.visibility = View.VISIBLE
-                    btnNext.visibility = View.GONE
+                    btnCheckOrNext.text = getString(R.string.check_permission)
                 }
             }
             R.id.rb_working_adb -> {
                 cardTutorialGivePermissionADB.visibility = View.VISIBLE
                 if(statusPermissionADB == true){
-                    btnCheckPermission.visibility = View.GONE
-                    btnNext.visibility = View.VISIBLE
+                    btnCheckOrNext.text = getString(R.string.next)
                 }else{
-                    btnCheckPermission.visibility = View.VISIBLE
-                    btnNext.visibility = View.GONE
+                    btnCheckOrNext.text = getString(R.string.check_permission)
                 }
             }
             else -> {
-                btnCheckPermission.visibility = View.GONE
-                btnNext.visibility = View.GONE
+                btnCheckOrNext.visibility = View.INVISIBLE
                 cardTutorialGivePermissionADB.visibility = View.GONE
             }
         }
 
     }
 
-    private fun checkPermissionStatus(){
-        val selectedOption = binding.rgWorkingMode.checkedRadioButtonId
-        when(selectedOption){
+    private fun checkPermissionStatus(idMethodWorking: Int){
+        when(idMethodWorking){
             R.id.rb_working_root -> {
                 viewModel.checkPermission(METHOD_ROOT)
                 Log.d("check", "Run working root")
