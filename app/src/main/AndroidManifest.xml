@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".MyApplication"
@@ -12,13 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTools"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".ui.resolution_changer.ResolutionChanger"
+            android:exported="false" />
         <activity
             android:name=".ui.setting.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

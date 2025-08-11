@@ -1,4 +1,4 @@
-package com.yogs.mytools.ui.home
+package com.yogs.mytools.util
 
 import android.view.LayoutInflater
 import android.view.View
