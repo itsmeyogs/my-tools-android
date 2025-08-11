@@ -32,8 +32,7 @@ class ResolutionChanger : AppCompatActivity() {
         observeSelectedMethod()
 
         binding.btnCheckOrNext.setOnClickListener {
-            val idMethodWorking = binding.rgWorkingMode.checkedRadioButtonId
-            when(idMethodWorking){
+            when(val idMethodWorking = binding.rgWorkingMode.checkedRadioButtonId){
                 R.id.rb_working_root -> {
                     checkPermissionStatus(idMethodWorking)
                 }

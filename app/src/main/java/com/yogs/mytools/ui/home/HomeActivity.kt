@@ -7,19 +7,17 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yogs.mytools.R
+import com.yogs.mytools.data.DataProvider
 import com.yogs.mytools.data.model.Tool
 import com.yogs.mytools.databinding.ActivityHomeBinding
-import com.yogs.mytools.util.HomeAdapter.OnItemClickCallback
 import com.yogs.mytools.ui.resolution_changer.ResolutionChanger
 import com.yogs.mytools.ui.setting.SettingsActivity
 import com.yogs.mytools.util.HomeAdapter
+import com.yogs.mytools.util.HomeAdapter.OnItemClickCallback
 import com.yogs.mytools.util.showToast
-import com.yogs.mytools.viewmodel.HomeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel : HomeViewModel by viewModel<HomeViewModel>()
     private lateinit var  homeAdapter : HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        val data = viewModel.getTools()
+        val data = DataProvider.getTools(this@HomeActivity)
         homeAdapter = HomeAdapter(data)
         showData()
         handleClickItemData()
