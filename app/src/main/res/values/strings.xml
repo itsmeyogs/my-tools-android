@@ -39,4 +39,15 @@
     <string name="permission_granted">Granted</string>
     <string name="permission_not_granted">Not Granted</string>
 
+    <string name="title_tutorial_give_permission_adb">How to give permission :</string>
+    <string name="body_tutorial_give_permission_adb_1">1. Enable developer mode: go to android settings -> about phone and look for the build number option. Tap it multiple times until developer mode is enabled.</string>
+    <string name="body_tutorial_give_permission_adb_2">2. Enable USB debugging: go to android settings developer options and look for USB debugging.</string>
+    <string name="body_tutorial_give_permission_adb_3">3. Setup ADB on your pc.</string>
+    <string name="body_tutorial_give_permission_adb_4">4. Connect device with computer: connect your device with your computer and look at your phone. A prompt may show up asking you to allow debugging by your computer, accept.</string>
+    <string name="body_tutorial_give_permission_adb_5">5. In terminal, write:</string>
+
+    <string name="code_tutorial_give_permission_adb">adb shell pm grant com.yogs.mytools android.permission.WRITE_SECURE_SETTINGS</string>
+    <string name="copy_code">Copy Code</string>
+
+
 </resources>

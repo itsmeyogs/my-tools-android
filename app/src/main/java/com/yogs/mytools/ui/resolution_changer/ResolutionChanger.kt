@@ -44,9 +44,48 @@ class ResolutionChanger : AppCompatActivity() {
             if(checkedId != -1){
                 checkPermissionStatus()
                 binding.cardPermissionStatus.visibility = View.VISIBLE
-                binding.btnCheckPermission.visibility = View.VISIBLE
+            }
+            manageVisibility(checkedId)
+        }
+    }
+
+
+    private fun manageVisibility(idMethodWorking: Int){
+        val statusPermissionRoot = viewModel.resultPermissionRoot.value
+        val statusPermissionADB = viewModel.resultPermissionADB.value
+
+        val cardTutorialGivePermissionADB = binding.cardTutorialGivePermissionAdb
+        val btnCheckPermission = binding.btnCheckPermission
+        val btnNext = binding.btnNext
+
+        when(idMethodWorking){
+            R.id.rb_working_root -> {
+                cardTutorialGivePermissionADB.visibility = View.GONE
+                if(statusPermissionRoot == true){
+                    btnCheckPermission.visibility = View.GONE
+                    btnNext.visibility = View.VISIBLE
+                }else{
+                    btnCheckPermission.visibility = View.VISIBLE
+                    btnNext.visibility = View.GONE
+                }
+            }
+            R.id.rb_working_adb -> {
+                cardTutorialGivePermissionADB.visibility = View.VISIBLE
+                if(statusPermissionADB == true){
+                    btnCheckPermission.visibility = View.GONE
+                    btnNext.visibility = View.VISIBLE
+                }else{
+                    btnCheckPermission.visibility = View.VISIBLE
+                    btnNext.visibility = View.GONE
+                }
+            }
+            else -> {
+                btnCheckPermission.visibility = View.GONE
+                btnNext.visibility = View.GONE
+                cardTutorialGivePermissionADB.visibility = View.GONE
             }
         }
+
     }
 
     private fun checkPermissionStatus(){
@@ -70,8 +109,8 @@ class ResolutionChanger : AppCompatActivity() {
     private fun observePermissionStatus(){
         val tvPermissionStatus = binding.tvPermissionStatus
 
-        viewModel.resultPermissionRoot.observe(this){
-            tvPermissionStatus.text = getStringPermissionStatus(it)
+        viewModel.resultPermissionRoot.observe(this){ status ->
+            tvPermissionStatus.text = getStringPermissionStatus(status)
         }
 
         viewModel.resultPermissionADB.observe(this){
