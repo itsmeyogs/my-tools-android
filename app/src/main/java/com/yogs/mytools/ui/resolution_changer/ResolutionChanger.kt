@@ -1,5 +1,6 @@
 package com.yogs.mytools.ui.resolution_changer
 
+import android.content.pm.PackageManager
 import android.icu.util.Output
 import android.os.Build
 import android.os.Bundle
@@ -69,7 +70,12 @@ class ResolutionChanger : AppCompatActivity() {
             }
 
             R.id.rb_working_adb -> {
-                showToast("Working ADB")
+                val checkPermission = checkSelfPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED
+                if(checkPermission){
+                    showToast("Granted")
+                }else{
+                    showToast("not Granted")
+                }
             }
 
             else -> {
