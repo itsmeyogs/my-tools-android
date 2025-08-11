@@ -12,6 +12,7 @@ import com.yogs.mytools.data.model.Tool
 import com.yogs.mytools.databinding.ActivityHomeBinding
 import com.yogs.mytools.ui.resolution_changer.ResolutionChanger
 import com.yogs.mytools.ui.setting.SettingsActivity
+import com.yogs.mytools.ui.speedtest.SpeedTestActivity
 import com.yogs.mytools.util.HomeAdapter
 import com.yogs.mytools.util.HomeAdapter.OnItemClickCallback
 import com.yogs.mytools.util.showToast
@@ -50,7 +51,8 @@ class HomeActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     getString(R.string.key_speed_test)->{
-                        showToast(getString(R.string.coming_soon))
+                        val intent = Intent(this@HomeActivity, SpeedTestActivity::class.java)
+                        startActivity(intent)
                     }
                     getString(R.string.key_fh_pw_generator) -> {
                        showToast(getString(R.string.coming_soon))

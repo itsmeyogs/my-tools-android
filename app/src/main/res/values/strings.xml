@@ -58,4 +58,9 @@
     <string name="copy_code">Copy Code</string>
 
 
+    <!--  string for speedtest tool  -->
+    <string name="speed_test">Speed Test</string>
+
+
+
 </resources>
