@@ -48,6 +48,7 @@
 
     <string name="code_tutorial_give_permission_adb">adb shell pm grant com.yogs.mytools android.permission.WRITE_SECURE_SETTINGS</string>
     <string name="copy_code">Copy Code</string>
+    <string name="message_success_copy_to_clipboard">Success copy to clipboard</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
+import com.yogs.mytools.util.copyToClipboard
 import com.yogs.mytools.util.showToast
 import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,6 +44,10 @@ class ResolutionChanger : AppCompatActivity() {
                     showToast(METHOD_NOT_SELECTED)
                 }
             }
+        }
+
+        binding.btnCopyCode.setOnClickListener {
+            copyToClipboard(getString(R.string.copy_code), getString(R.string.code_tutorial_give_permission_adb))
         }
 
 
