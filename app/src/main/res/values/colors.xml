@@ -13,4 +13,8 @@
 
     <color name="colorError">#E74C3C</color>
     <color name="colorOnError">#FFFFFF</color>
+
+    <color name="colorWebUi">#1a2035</color>
+    <color name="colorOnWebUi">#FFFFFF</color>
+    <color name="colorBackgroundWebUi">#181818</color>
 </resources>

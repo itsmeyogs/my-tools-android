@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorWebUi" format="color"/>
+    <attr name="colorOnWebUi" format="color"/>
+    <attr name="colorBackgroundWebUi" format="color"/>
+</resources>

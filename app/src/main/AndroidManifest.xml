@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".MyApplication"
@@ -15,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTools"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.speedtest.SpeedTestActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.resolution_changer.ResolutionChanger"
             android:exported="false" />
