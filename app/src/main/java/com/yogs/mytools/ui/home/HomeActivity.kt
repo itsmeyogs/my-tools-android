@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         val data = viewModel.getTools()
         homeAdapter = HomeAdapter(data)
         showData()
-        handleItemClick()
+        handleClickItemData()
 
     }
 
@@ -40,15 +40,28 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleItemClick(){
+    private fun handleClickItemData(){
         homeAdapter.setOnItemClickCallback(object : OnItemClickCallback {
             override fun onItemClicked(data: Tool) {
-               Toast.makeText(this@HomeActivity, data.title, Toast.LENGTH_SHORT).show()
-
+                when(data.key){
+                    getString(R.string.key_screen_resolution_changer) -> {
+                        showToast("OTW")
+                    }
+                    getString(R.string.key_fh_pw_generator) -> {
+                        showToast(getString(R.string.coming_soon))
+                    }
+                    else -> {
+                        showToast(getString(R.string.coming_soon))
+                    }
+                }
             }
         })
     }
 
+
+    private fun showToast(message : String){
+        Toast.makeText(this@HomeActivity, message, Toast.LENGTH_SHORT).show()
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
