@@ -11,6 +11,7 @@ import com.yogs.mytools.R
 import com.yogs.mytools.data.model.Tool
 import com.yogs.mytools.databinding.ActivityHomeBinding
 import com.yogs.mytools.ui.home.HomeAdapter.OnItemClickCallback
+import com.yogs.mytools.ui.resolution_changer.ResolutionChanger
 import com.yogs.mytools.ui.setting.SettingsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,7 +46,8 @@ class HomeActivity : AppCompatActivity() {
             override fun onItemClicked(data: Tool) {
                 when(data.key){
                     getString(R.string.key_screen_resolution_changer) -> {
-                        showToast("OTW")
+                        val intent = Intent(this@HomeActivity, ResolutionChanger::class.java)
+                        startActivity(intent)
                     }
                     getString(R.string.key_fh_pw_generator) -> {
                         showToast(getString(R.string.coming_soon))
