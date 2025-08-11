@@ -16,4 +16,14 @@
 
     <string name="title">title</string>
     <string name="summary">summary</string>
+
+
+    <string name="key_screen_resolution_changer">screen_resolution_changer</string>
+    <string name="title_screen_resolution_changer">Screen Resolution Changer</string>
+    <string name="desc_screen_resolution_changer">Change screen resolution and pixel density (DPI)</string>
+
+    <string name="key_fh_pw_generator">fh_pw_generator</string>
+    <string name="title_fh_pw_generator">Wifi FH Password Generator</string>
+    <string name="desc_fh_pw_generator">Generate default password for the Fiber Home provider WiFi</string>
+
 </resources>
