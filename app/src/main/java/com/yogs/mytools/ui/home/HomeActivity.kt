@@ -6,15 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.yogs.mytools.R
-import com.yogs.mytools.databinding.ActivityMainBinding
+import com.yogs.mytools.databinding.ActivityHomeBinding
 import com.yogs.mytools.ui.setting.SettingsActivity
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class HomeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
-                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
                 startActivity(intent)
                 true
             }
