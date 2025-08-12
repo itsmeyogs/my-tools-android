@@ -49,7 +49,7 @@ class SpeedTestActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.speedtest_menu, menu)
+        menuInflater.inflate(R.menu.refresh_web_view_menu, menu)
         return true
     }
 
