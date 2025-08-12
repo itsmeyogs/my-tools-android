@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIconTint="?attr/colorOnWebUi"
-            app:title="@string/speed_test"
+            app:title="@string/router_manager"
             app:titleTextAppearance="@style/ToolbarTitle"
             app:titleTextColor="?attr/colorOnWebUi" />
     </com.google.android.material.appbar.AppBarLayout>
