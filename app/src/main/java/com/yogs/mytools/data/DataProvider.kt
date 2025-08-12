@@ -28,7 +28,24 @@ object DataProvider{
                 desc = ContextCompat.getString(context, R.string.desc_fh_pw_generator)
             ),
         )
+    }
 
+    fun getSpeedTestHtml() : String{
+        val htmlData = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+                    iframe { width: 100%; height: 100%; border: none; }
+                </style>
+            </head>
+            <body>
+                <iframe src="https://openspeedtest.com/Get-widget.php"></iframe>
+            </body>
+            </html>
+        """.trimIndent()
+        return htmlData
     }
 
 }
