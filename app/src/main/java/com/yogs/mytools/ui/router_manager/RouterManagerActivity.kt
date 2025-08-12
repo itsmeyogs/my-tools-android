@@ -44,7 +44,15 @@ class RouterManagerActivity : AppCompatActivity() {
 
     private fun handleRefreshConnectionStatus(){
         binding.btnRefresh.setOnClickListener {
-            checkAndRequestPermissionLocation()
+            lifecycleScope.launch {
+                binding.apply {
+                    loadingInitWebView.visibility = View.VISIBLE
+                    delay(2000)
+                    loadingInitWebView.visibility = View.GONE
+                    checkAndRequestPermissionLocation()
+                }
+            }
+
         }
     }
 
@@ -63,7 +71,11 @@ class RouterManagerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_refresh -> {
-                webView.reload()
+                binding.apply {
+                    webView.visibility = View.GONE
+                    cardConnectionStatus.visibility = View.VISIBLE
+                }
+                checkAndRequestPermissionLocation()
                 true
             }
             else -> {
@@ -91,6 +103,10 @@ class RouterManagerActivity : AppCompatActivity() {
                         invalidateOptionsMenu()
                         showWebView(data.defaultGateway)
                     }
+                }else{
+                    btnRefresh.visibility = View.VISIBLE
+                    isVisibleRefresh = false
+                    invalidateOptionsMenu()
                 }
             }
         }
