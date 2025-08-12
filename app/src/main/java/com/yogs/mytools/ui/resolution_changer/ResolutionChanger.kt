@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
 import com.yogs.mytools.util.copyToClipboard
 import com.yogs.mytools.util.setUpAppBar
 import com.yogs.mytools.util.showToast
 import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResolutionChanger : AppCompatActivity() {
@@ -33,17 +36,7 @@ class ResolutionChanger : AppCompatActivity() {
         observeSelectedMethod()
 
         binding.btnCheckOrNext.setOnClickListener {
-            when(val idMethodWorking = binding.rgWorkingMode.checkedRadioButtonId){
-                R.id.rb_working_root -> {
-                    checkPermissionStatus(idMethodWorking)
-                }
-                R.id.rb_working_adb -> {
-                    checkPermissionStatus(idMethodWorking)
-                }
-                else -> {
-                    showToast(METHOD_NOT_SELECTED)
-                }
-            }
+            manageActionBtnCheckOrNext()
         }
 
         binding.btnCopyCode.setOnClickListener {
@@ -54,6 +47,69 @@ class ResolutionChanger : AppCompatActivity() {
 
     }
 
+    private fun manageActionBtnCheckOrNext(){
+        val statusPermissionRoot = viewModel.resultPermissionRoot.value
+        val statusPermissionADB = viewModel.resultPermissionADB.value
+        when(val methodId = binding.rgWorkingMode.checkedRadioButtonId){
+            R.id.rb_working_root ->{
+                if(statusPermissionRoot == true){
+                    actionNextButton()
+                }else{
+                    actionCheckPermissionButton(methodId)
+                }
+            }
+
+            R.id.rb_working_adb -> {
+                if(statusPermissionADB == true){
+                    actionNextButton()
+                }else{
+                    actionCheckPermissionButton(methodId)
+                }
+            }
+            else -> {
+                showToast(getString(R.string.unknown_action))
+            }
+        }
+
+    }
+
+
+    private fun actionNextButton(){
+        showToast("Next Clicked")
+    }
+
+    private fun actionCheckPermissionButton(selectedMethodId : Int){
+        showLoadingCheckPermission()
+        checkPermissionStatus(selectedMethodId)
+    }
+
+    private fun checkPermissionStatus(idMethodWorking: Int){
+        when(idMethodWorking){
+            R.id.rb_working_root -> {
+                viewModel.checkPermission(METHOD_ROOT)
+            }
+            R.id.rb_working_adb -> {
+                viewModel.checkPermission(METHOD_ADB)
+            }
+            else -> {
+                viewModel.checkPermission(METHOD_NOT_SELECTED)
+            }
+        }
+    }
+
+
+    private fun showLoadingCheckPermission(){
+        binding.apply {
+            lifecycleScope.launch {
+                tvPermissionStatus.visibility = View.INVISIBLE
+                loadingPermissionStatus.visibility = View.VISIBLE
+                delay(2000)
+                tvPermissionStatus.visibility = View.VISIBLE
+                loadingPermissionStatus.visibility = View.GONE
+            }
+        }
+    }
+
     private fun observeSelectedMethod(){
         binding.rgWorkingMode.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId != -1){
@@ -61,12 +117,36 @@ class ResolutionChanger : AppCompatActivity() {
                 binding.cardPermissionStatus.visibility = View.VISIBLE
                 binding.btnCheckOrNext.visibility = View.VISIBLE
             }
-            manageVisibility(checkedId)
+            manageVisibilityAndTextBtnCheckOrNext(checkedId)
         }
     }
 
+    private fun observePermissionStatus(){
 
-    private fun manageVisibility(idMethodWorking: Int){
+        viewModel.resultPermissionRoot.observe(this){ status ->
+            binding.tvPermissionStatus.text = getStringPermissionStatus(status)
+            manageTextBtnCheckOrNext()
+        }
+
+        viewModel.resultPermissionADB.observe(this){ status ->
+            binding.tvPermissionStatus.text = getStringPermissionStatus(status)
+            manageTextBtnCheckOrNext()
+        }
+    }
+
+    private fun manageTextBtnCheckOrNext(){
+        val selectedMethodId = binding.rgWorkingMode.checkedRadioButtonId
+        manageVisibilityAndTextBtnCheckOrNext(selectedMethodId)
+    }
+
+    private fun getStringPermissionStatus(value: Boolean) : String{
+        val result = if(value) getString(R.string.permission_granted) else getString(R.string.permission_not_granted)
+        Log.d("check result", result)
+        return getString(R.string.permission_status, result)
+    }
+
+
+    private fun manageVisibilityAndTextBtnCheckOrNext(idMethodWorking: Int){
         val statusPermissionRoot = viewModel.resultPermissionRoot.value
         val statusPermissionADB = viewModel.resultPermissionADB.value
 
@@ -98,38 +178,10 @@ class ResolutionChanger : AppCompatActivity() {
 
     }
 
-    private fun checkPermissionStatus(idMethodWorking: Int){
-        when(idMethodWorking){
-            R.id.rb_working_root -> {
-                viewModel.checkPermission(METHOD_ROOT)
-                Log.d("check", "Run working root")
-            }
-            R.id.rb_working_adb -> {
-                viewModel.checkPermission(METHOD_ADB)
-                Log.d("check", "Run working adb")
-            }
-            else -> {
-                viewModel.checkPermission(METHOD_NOT_SELECTED)
-            }
-        }
-    }
 
 
-    private fun observePermissionStatus(){
-        val tvPermissionStatus = binding.tvPermissionStatus
 
-        viewModel.resultPermissionRoot.observe(this){ status ->
-            tvPermissionStatus.text = getStringPermissionStatus(status)
-        }
 
-        viewModel.resultPermissionADB.observe(this){
-            tvPermissionStatus.text = getStringPermissionStatus(it)
-        }
-    }
 
-    private fun getStringPermissionStatus(value: Boolean) : String{
-        val result = if(value) getString(R.string.permission_granted) else getString(R.string.permission_not_granted)
-        Log.d("check result", result)
-        return getString(R.string.permission_status, result)
-    }
+
 }

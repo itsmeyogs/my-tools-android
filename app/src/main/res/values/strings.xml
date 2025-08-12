@@ -79,7 +79,7 @@
     <string name="wifi_ssid">WiFi SSID : %1$s</string>
     <string name="default_gateway">Default Gateway : %1$s</string>
     <string name="ip_address">Ip Address : %1$s</string>
-
+    <string name="unknown_action">Unknown Action</string>
 
 
 </resources>
