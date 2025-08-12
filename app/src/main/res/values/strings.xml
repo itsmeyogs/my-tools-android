@@ -60,8 +60,11 @@
 
     <!--  string for speedtest tool  -->
     <string name="speed_test">Speed Test</string>
+    <string name="disable_prefix_results">results</string>
+    <string name="disable_prefix_widget">widget</string>
     <string name="copy_url">copy url</string>
     <string name="url">url</string>
+    <string name="refresh">Refresh</string>
 
 
 </resources>

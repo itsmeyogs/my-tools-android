@@ -3,6 +3,9 @@ package com.yogs.mytools.ui.speedtest
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -28,13 +31,38 @@ class SpeedTestActivity : AppCompatActivity() {
 
         webView = binding.webView
         toolbar.post {
-            val toolbarHeight = toolbar.height
-            webView.setPadding(0, toolbarHeight, 0, 0)
+            val toolbarHeight = toolbar.height - 52
+            val layoutParams = webView.layoutParams
+            if (layoutParams is ViewGroup.MarginLayoutParams) {
+                // 3. Atur topMargin dengan nilai toolbarHeight
+                layoutParams.topMargin = toolbarHeight
+
+                // 4. Terapkan kembali LayoutParams yang sudah diubah
+                webView.layoutParams = layoutParams
+            }
 
         }
 
         showSpeedTest()
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.speedtest_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_refresh -> {
+                webView.reload()
+                 true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
 
     }
 
@@ -56,21 +84,16 @@ class SpeedTestActivity : AppCompatActivity() {
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             val url = request?.url.toString()
 
-            val disablePrefixResult =  "results"
-            val disablePrefixWidget = "widget"
-            if(url.contains(disablePrefixResult, ignoreCase = true)){
+            if(url.contains(getString(R.string.disable_prefix_results), ignoreCase = true)){
                 copyToClipboard(getString(R.string.copy_url), url, getString(R.string.message_success_copy_to_clipboard, getString(R.string.url)))
                 //disable click url has results
                 return true
-            }else if(url.contains(disablePrefixWidget, ignoreCase = true)){
+            }else if(url.contains(getString(R.string.disable_prefix_widget), ignoreCase = true)){
                 //disable click url has widget
                 return true
             }else{
                 return false
             }
         }
-
-
-
     }
 }
