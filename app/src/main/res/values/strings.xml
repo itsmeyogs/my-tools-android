@@ -78,8 +78,6 @@
     <string name="separator_status_router_manager">:</string>
     <string name="wifi_status_connected">Connected</string>
     <string name="wifi_status_not_connected">Not Connected</string>
-    <string name="permission_location_granted">Permission Location Granted</string>
-    <string name="permission_location_denied">Permission Location Denied</string>
 
 
 </resources>
