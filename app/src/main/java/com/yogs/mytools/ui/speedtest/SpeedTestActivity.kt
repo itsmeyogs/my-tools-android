@@ -1,16 +1,13 @@
 package com.yogs.mytools.ui.speedtest
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.marginTop
 import com.yogs.mytools.R
 import com.yogs.mytools.data.DataProvider
 import com.yogs.mytools.databinding.ActivitySpeedTestBinding
@@ -42,7 +39,9 @@ class SpeedTestActivity : AppCompatActivity() {
     }
 
 
+
     private fun showSpeedTest(){
+        @SuppressLint("SetJavaScriptEnabled")
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = SpeedTestWebViewClient()
         webView.setBackgroundColor(Color.TRANSPARENT)
