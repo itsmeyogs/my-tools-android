@@ -38,6 +38,14 @@ class RouterManagerActivity : AppCompatActivity() {
 
         checkAndRequestPermissionLocation()
         observeConnectionStatus()
+        handleRefreshConnectionStatus()
+    }
+
+
+    private fun handleRefreshConnectionStatus(){
+        binding.btnRefresh.setOnClickListener {
+            checkAndRequestPermissionLocation()
+        }
     }
 
 
@@ -74,6 +82,7 @@ class RouterManagerActivity : AppCompatActivity() {
 
                 if(data.isConnected){
                     lifecycleScope.launch {
+                        btnRefresh.visibility = View.GONE
                         loadingInitWebView.visibility = View.VISIBLE
                         delay(3000)
                         loadingInitWebView.visibility = View.GONE
