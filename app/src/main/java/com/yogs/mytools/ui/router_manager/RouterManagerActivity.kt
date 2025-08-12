@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.R.*
+import com.google.android.material.R.attr
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityRouterManagerBinding
 import com.yogs.mytools.util.setUpAppBar
@@ -26,6 +27,7 @@ class RouterManagerActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRouterManagerBinding
     private val viewModel: RouterManagerViewModel by viewModel<RouterManagerViewModel>()
     private lateinit var webView : WebView
+    private var isVisibleRefresh = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,29 @@ class RouterManagerActivity : AppCompatActivity() {
         observeConnectionStatus()
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.refresh_web_view_menu, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val actionRefresh = menu?.findItem(R.id.action_refresh)
+        actionRefresh?.isVisible = isVisibleRefresh
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_refresh -> {
+                webView.reload()
+                true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
 
     private fun observeConnectionStatus(){
         viewModel.statusConnection.observe(this){data->
@@ -53,6 +78,8 @@ class RouterManagerActivity : AppCompatActivity() {
                         delay(3000)
                         loadingInitWebView.visibility = View.GONE
                         cardConnectionStatus.visibility = View.GONE
+                        isVisibleRefresh = true
+                        invalidateOptionsMenu()
                         showWebView(data.defaultGateway)
                     }
                 }
@@ -61,16 +88,17 @@ class RouterManagerActivity : AppCompatActivity() {
     }
 
 
+
     private fun showWebView(gateway : String){
         changeAppBarStyle()
-        binding.webView.apply {
+        webView.apply {
             @SuppressLint("SetJavaScriptEnabled")
             settings.javaScriptEnabled = true
             webViewClient = object : WebViewClient(){
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
                     binding.loadingPageWebView.visibility = View.VISIBLE
-                    binding.webView.visibility = View.VISIBLE
+                    webView.visibility = View.VISIBLE
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {

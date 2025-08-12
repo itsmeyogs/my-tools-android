@@ -13,6 +13,7 @@ class RouterManagerViewModel(private val repository: RouterManagerRepository) : 
     private val _statusConnection = MutableLiveData<WifiStatus>(WifiStatus())
     val statusConnection : LiveData<WifiStatus> get() = _statusConnection
 
+
     fun getConnectionStatus(){
         viewModelScope.launch {
            val result =  repository.getConnectionStatus()
