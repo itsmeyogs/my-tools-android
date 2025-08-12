@@ -38,7 +38,7 @@ class ResolutionChanger : AppCompatActivity() {
                     checkPermissionStatus(idMethodWorking)
                 }
                 R.id.rb_working_adb -> {
-                    showToast("next clicked")
+                    checkPermissionStatus(idMethodWorking)
                 }
                 else -> {
                     showToast(METHOD_NOT_SELECTED)
