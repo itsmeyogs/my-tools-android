@@ -5,16 +5,13 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityRouterManagerBinding
 import com.yogs.mytools.util.setUpAppBar
-import com.yogs.mytools.util.showToast
 
 class RouterManagerActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRouterManagerBinding
@@ -32,41 +29,59 @@ class RouterManagerActivity : AppCompatActivity() {
 
 
     private fun getStatusConnection(){
-        val tvWifiStatus = binding.tvWifiStatus
-        val tvWifiSSID = binding.tvWifiSsid
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetwork
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
         var wifiStatus = getString(R.string.wifi_status_not_connected)
         var wifiSSID = "-"
+        var ipAddress = "-"
+        var defaultGateway = "-"
         if(activeNetwork != null){
-            Log.d("activeNetwork" , "object : $activeNetwork")
             val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
-            Log.d("networkCapabilities", "object : $networkCapabilities")
-
             if(networkCapabilities != null && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)){
                 wifiStatus = getString(R.string.wifi_status_connected)
                 wifiSSID = getWifiSSID(wifiManager)
+                ipAddress = getIpAddress(wifiManager)
+                defaultGateway = getDefaultGateway(wifiManager)
             }
         }
 
-        tvWifiStatus.text = getString(R.string.wifi_status, wifiStatus)
-        tvWifiSSID.text = getString(R.string.wifi_ssid, wifiSSID)
+        binding.apply {
+            tvWifiStatus.text = getString(R.string.wifi_status, wifiStatus)
+            tvWifiSsid.text = getString(R.string.wifi_ssid, wifiSSID)
+            tvIpAddress.text = getString(R.string.ip_address, ipAddress)
+            tvDefaultGateway.text = getString(R.string.default_gateway, defaultGateway)
+
+        }
     }
 
     @Suppress("DEPRECATION")
     private fun getWifiSSID(wifiManager: WifiManager): String{
         val wifiInfo = wifiManager.connectionInfo
-
-        Log.d("network", "object: ${wifiManager.dhcpInfo}")
-        Log.d("network2", "object: ${wifiManager.connectionInfo}")
-        Log.d("network3", "object: ${wifiManager.wifiState}")
-        return wifiInfo.ssid.trim{it == '"'}
-
-//        val dhcpInfo = wifiManager.dhcpInfo
-
+        return wifiInfo.ssid.trim{ it == '"' }
     }
+
+    @Suppress("DEPRECATION")
+    private fun getIpAddress(wifiManager: WifiManager):String{
+        val wifiDhcpInfo = wifiManager.dhcpInfo
+        return intToIp(wifiDhcpInfo.ipAddress)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getDefaultGateway(wifiManager: WifiManager):String{
+        val wifiDhcpInfo = wifiManager.dhcpInfo
+        return intToIp(wifiDhcpInfo.gateway)
+    }
+
+    private fun intToIp(ipAddress: Int): String {
+        return (ipAddress and 0xFF).toString() + "." +
+                (ipAddress shr 8 and 0xFF) + "." +
+                (ipAddress shr 16 and 0xFF) + "." +
+                (ipAddress shr 24 and 0xFF)
+    }
+
+
 
     private fun checkAndRequestPermissionLocation(){
         val permission = android.Manifest.permission.ACCESS_FINE_LOCATION

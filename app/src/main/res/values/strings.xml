@@ -74,10 +74,12 @@
     <!--  string for router manager tool  -->
     <string name="router_manager">Router Manager</string>
     <string name="wifi_status">WiFi Status : %1$s</string>
-    <string name="wifi_ssid">WiFi SSID : %1$s</string>
-    <string name="separator_status_router_manager">:</string>
     <string name="wifi_status_connected">Connected</string>
     <string name="wifi_status_not_connected">Not Connected</string>
+    <string name="wifi_ssid">WiFi SSID : %1$s</string>
+    <string name="default_gateway">Default Gateway : %1$s</string>
+    <string name="ip_address">Ip Address : %1$s</string>
+
 
 
 </resources>
