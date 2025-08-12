@@ -22,6 +22,10 @@
         <item name="colorOnError">@color/colorOnError</item>
 
 
+        <item name="colorWebUi">@color/colorWebUi</item>
+        <item name="colorOnWebUi">@color/colorOnWebUi</item>
+        <item name="colorBackgroundWebUi">@color/colorBackgroundWebUi</item>
+
     </style>
 
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">

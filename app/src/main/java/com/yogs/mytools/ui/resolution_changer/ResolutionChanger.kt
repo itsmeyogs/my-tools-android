@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
 import com.yogs.mytools.util.copyToClipboard
+import com.yogs.mytools.util.setUpAppBar
 import com.yogs.mytools.util.showToast
 import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +27,7 @@ class ResolutionChanger : AppCompatActivity() {
         binding = ActivityResolutionChangerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUpAppBar()
+        setUpAppBar(binding.toolbar)
 
         observePermissionStatus()
         observeSelectedMethod()
@@ -130,12 +131,5 @@ class ResolutionChanger : AppCompatActivity() {
         val result = if(value) getString(R.string.permission_granted) else getString(R.string.permission_not_granted)
         Log.d("check result", result)
         return getString(R.string.permission_status, result)
-    }
-
-
-    private fun setUpAppBar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 }

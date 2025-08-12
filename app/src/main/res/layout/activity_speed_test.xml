@@ -5,14 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/android:colorBackground"
-    tools:context=".ui.setting.SettingsActivity">
+    android:background="?attr/colorBackgroundWebUi"
+    tools:context=".ui.speedtest.SpeedTestActivity">
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_header_curved"
+        android:background="@drawable/bg_header_curved_web_ui"
         android:fitsSystemWindows="true"
         app:elevation="0dp"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,22 +32,16 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIconTint="?attr/colorOnPrimary"
-            app:title="@string/settings"
+            app:navigationIconTint="?attr/colorOnWebUi"
+            app:title="@string/speed_test"
             app:titleTextAppearance="@style/ToolbarTitle"
-            app:titleTextColor="?attr/colorOnPrimary" />
-
+            app:titleTextColor="?attr/colorOnWebUi" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/settings_fragment"
-        android:name="com.yogs.mytools.ui.setting.SettingsFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?attr/android:colorBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

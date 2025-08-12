@@ -17,7 +17,7 @@
     <string name="title">title</string>
     <string name="summary">summary</string>
 
-    <string name="message_success_copy_to_clipboard">Success copy to clipboard</string>
+    <string name="message_success_copy_to_clipboard">Success copy %1$s to clipboard</string>
 
 
     <!--    string items tools-->
@@ -57,6 +57,14 @@
     <string name="code_tutorial_give_permission_adb">adb shell pm grant com.yogs.mytools android.permission.WRITE_SECURE_SETTINGS</string>
     <string name="copy_code">Copy Code</string>
 
+
+    <!--  string for speedtest tool  -->
+    <string name="speed_test">Speed Test</string>
+    <string name="disable_prefix_results">results</string>
+    <string name="disable_prefix_widget">widget</string>
+    <string name="copy_url">copy url</string>
+    <string name="url">url</string>
+    <string name="refresh">Refresh</string>
 
 
 </resources>
