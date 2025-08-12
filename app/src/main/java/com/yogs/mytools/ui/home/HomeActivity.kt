@@ -54,6 +54,9 @@ class HomeActivity : AppCompatActivity() {
                         val intent = Intent(this@HomeActivity, SpeedTestActivity::class.java)
                         startActivity(intent)
                     }
+                    getString(R.string.key_router_manager)->{
+                        showToast(getString(R.string.coming_soon))
+                    }
                     getString(R.string.key_fh_pw_generator) -> {
                        showToast(getString(R.string.coming_soon))
                     }

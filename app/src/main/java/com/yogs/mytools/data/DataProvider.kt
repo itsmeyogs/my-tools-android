@@ -22,11 +22,18 @@ object DataProvider{
                 desc = ContextCompat.getString(context, R.string.desc_speed_test)
             ),
             Tool(
+                key = ContextCompat.getString(context, R.string.key_router_manager),
+                image = R.drawable.ic_router_manager,
+                title = ContextCompat.getString(context, R.string.title_router_manager),
+                desc = ContextCompat.getString(context, R.string.desc_router_manager)
+            ),
+            Tool(
                 key = ContextCompat.getString(context, R.string.key_fh_pw_generator),
                 image = R.drawable.ic_fh_pw_generator,
                 title = ContextCompat.getString(context, R.string.title_fh_pw_generator),
                 desc = ContextCompat.getString(context, R.string.desc_fh_pw_generator)
             ),
+
         )
     }
 
