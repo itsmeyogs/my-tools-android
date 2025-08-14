@@ -80,6 +80,8 @@
     <string name="default_gateway">Default Gateway : %1$s</string>
     <string name="ip_address">Ip Address : %1$s</string>
     <string name="unknown_action">Unknown Action</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
