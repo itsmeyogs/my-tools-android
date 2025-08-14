@@ -2,14 +2,13 @@ package com.yogs.mytools.ui.resolution_changer
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.FragmentSelectMethodResolutionChangerBinding
-import com.yogs.mytools.ui.resolution_changer.ResolutionChanger.Companion
 import com.yogs.mytools.util.copyToClipboard
 import com.yogs.mytools.util.showToast
 import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
@@ -24,7 +23,7 @@ class SelectMethodResolutionChangerFragment : Fragment() {
 
     private val viewModel : ResolutionChangerViewModel by viewModel<ResolutionChangerViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSelectMethodResolutionChangerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -122,12 +121,12 @@ class SelectMethodResolutionChangerFragment : Fragment() {
 
     private fun observePermissionStatus(){
 
-        viewModel.resultPermissionRoot.observe(this){ status ->
+        viewModel.resultPermissionRoot.observe(viewLifecycleOwner){ status ->
             binding.tvPermissionStatus.text = getStringPermissionStatus(status)
             manageTextBtnCheckOrNext()
         }
 
-        viewModel.resultPermissionADB.observe(this){ status ->
+        viewModel.resultPermissionADB.observe(viewLifecycleOwner){ status ->
             binding.tvPermissionStatus.text = getStringPermissionStatus(status)
             manageTextBtnCheckOrNext()
         }

@@ -1,19 +1,10 @@
 package com.yogs.mytools.ui.resolution_changer
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.yogs.mytools.R
 import com.yogs.mytools.databinding.ActivityResolutionChangerBinding
-import com.yogs.mytools.util.copyToClipboard
 import com.yogs.mytools.util.setUpAppBar
-import com.yogs.mytools.util.showToast
-import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResolutionChanger : AppCompatActivity() {
     private lateinit var binding: ActivityResolutionChangerBinding
