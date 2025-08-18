@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.yogs.mytools.R
 import com.yogs.mytools.databinding.FragmentMainResolutionChangerBinding
+import com.yogs.mytools.viewmodel.ResolutionChangerViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainResolutionChangerFragment : Fragment() {
     private var _binding : FragmentMainResolutionChangerBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: ResolutionChangerViewModel by viewModel<ResolutionChangerViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         _binding = FragmentMainResolutionChangerBinding.inflate(inflater, container, false)
@@ -18,8 +23,18 @@ class MainResolutionChangerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvTest.text = ResolutionChanger.METHOD_ADB
 
+        showDisplayInfo()
+
+
+    }
+
+    private fun showDisplayInfo(){
+        val displayInfo = viewModel.getDisplayInfo()
+        binding.apply {
+            tvCurrentResolution.text = getString(R.string.current_resolution, displayInfo.resolution)
+            tvCurrentDpi.text = getString(R.string.current_dpi, displayInfo.dpi)
+        }
     }
 
     override fun onDestroy() {

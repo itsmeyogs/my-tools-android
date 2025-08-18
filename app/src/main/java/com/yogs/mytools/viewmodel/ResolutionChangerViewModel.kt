@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.yogs.mytools.data.model.DisplayInfo
 import com.yogs.mytools.data.repository.ResolutionChangerRepository
 import com.yogs.mytools.ui.resolution_changer.ResolutionChanger
 import kotlinx.coroutines.Dispatchers
@@ -63,4 +64,8 @@ class ResolutionChangerViewModel(
         }
     }
 
+
+    fun getDisplayInfo():DisplayInfo{
+        return repository.getDisplayInfo()
+    }
 }

@@ -61,6 +61,10 @@
     <string name="code_tutorial_give_permission_adb">adb shell pm grant com.yogs.mytools android.permission.WRITE_SECURE_SETTINGS</string>
     <string name="copy_code">Copy Code</string>
 
+    <string name="display_info">Display Info</string>
+    <string name="current_resolution">Resolution : %1$s</string>
+    <string name="current_dpi">DPI : %1$s</string>
+
 
     <!--  string for speedtest tool  -->
     <string name="speed_test">Speed Test</string>

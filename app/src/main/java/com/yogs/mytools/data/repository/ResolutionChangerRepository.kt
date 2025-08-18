@@ -2,7 +2,10 @@ package com.yogs.mytools.data.repository
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
+import android.view.WindowMetrics
 import androidx.core.content.ContextCompat
+import com.yogs.mytools.data.model.DisplayInfo
 import com.yogs.mytools.data.preferences.DataPreference
 import kotlinx.coroutines.flow.Flow
 
@@ -49,6 +52,20 @@ class ResolutionChangerRepository(
 
     suspend fun removeWorkingMode(){
         preference.removeSRCWorkingMode()
+    }
+
+    fun getDisplayInfo() : DisplayInfo{
+        val displayMetrics = context.resources.displayMetrics
+
+        val screenWidth = displayMetrics.widthPixels.toString()
+        val screenHeight = displayMetrics.heightPixels.toString()
+
+        val dpi = displayMetrics.densityDpi
+
+        return DisplayInfo(
+            resolution = screenWidth+"x"+screenHeight,
+            dpi = dpi.toString()
+        )
     }
 
 }
