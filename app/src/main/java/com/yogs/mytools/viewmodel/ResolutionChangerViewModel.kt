@@ -45,6 +45,8 @@ class ResolutionChangerViewModel(
         }
     }
 
+
+
     fun saveWorkingMode(workingMode : String){
         viewModelScope.launch {
             repository.saveWorkingMode(workingMode)

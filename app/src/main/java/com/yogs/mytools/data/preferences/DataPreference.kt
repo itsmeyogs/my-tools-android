@@ -1,6 +1,7 @@
 package com.yogs.mytools.data.preferences
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -16,6 +17,7 @@ class DataPreference (private val dataStore: DataStore<Preferences>){
 
 
     suspend fun saveSRCWorkingModeKey(workingMode: String){
+        Log.d("save Preference", workingMode)
         dataStore.edit { preferences ->
             preferences[SRC_WORKING_MODE_KEY] = workingMode
         }
