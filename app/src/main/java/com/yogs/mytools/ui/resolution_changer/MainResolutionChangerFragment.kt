@@ -31,9 +31,10 @@ class MainResolutionChangerFragment : Fragment() {
 
     private fun showDisplayInfo(){
         val displayInfo = viewModel.getDisplayInfo()
+        val resolution = displayInfo.screenWidth.toString()+"x"+displayInfo.screenHeight.toString()
         binding.apply {
-            tvCurrentResolution.text = getString(R.string.current_resolution, displayInfo.resolution)
-            tvCurrentDpi.text = getString(R.string.current_dpi, displayInfo.dpi)
+            tvCurrentResolution.text = getString(R.string.current_resolution, resolution)
+            tvCurrentDpi.text = getString(R.string.current_dpi, displayInfo.dpi.toString())
         }
     }
 

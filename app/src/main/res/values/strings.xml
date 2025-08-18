@@ -64,6 +64,14 @@
     <string name="display_info">Display Info</string>
     <string name="current_resolution">Resolution : %1$s</string>
     <string name="current_dpi">DPI : %1$s</string>
+    <string name="change_resolution_and_dpi">Change Resolution &amp; DPI</string>
+    <string name="x">x</string>
+    <string name="apply">Apply</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="dpi">DPI</string>
+
+
 
 
     <!--  string for speedtest tool  -->
@@ -84,8 +92,9 @@
     <string name="default_gateway">Default Gateway : %1$s</string>
     <string name="ip_address">Ip Address : %1$s</string>
     <string name="unknown_action">Unknown Action</string>
-
-
+    <string name="reset">Reset</string>
+    <string name="save_and_apply"><![CDATA[Save & Apply]]></string>
+    <string name="load">Load</string>
 
 
 </resources>
