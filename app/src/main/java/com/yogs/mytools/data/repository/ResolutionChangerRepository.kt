@@ -3,9 +3,13 @@ package com.yogs.mytools.data.repository
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import com.yogs.mytools.data.preferences.DataPreference
+import kotlinx.coroutines.flow.Flow
 
-class ResolutionChangerRepository(private val context: Context) {
-
+class ResolutionChangerRepository(
+    private val context: Context,
+    private val preference: DataPreference
+) {
     fun checkPermissionADB():Boolean{
         return ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED
     }
@@ -33,6 +37,18 @@ class ResolutionChangerRepository(private val context: Context) {
         }catch (e: Exception){
             false
         }
+    }
+
+    suspend fun saveWorkingMode(workingMode: String){
+        preference.saveSRCWorkingModeKey(workingMode)
+    }
+
+    fun getWorkingMode() : Flow<String?> {
+        return preference.getSRCWorkingMode()
+    }
+
+    suspend fun removeWorkingMode(){
+        preference.removeSRCWorkingMode()
     }
 
 }

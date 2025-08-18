@@ -52,7 +52,7 @@ class SelectMethodResolutionChangerFragment : Fragment() {
         when(val methodId = binding.rgWorkingMode.checkedRadioButtonId){
             R.id.rb_working_root ->{
                 if(statusPermissionRoot == true){
-                    actionNextButton()
+                    actionNextButton(ResolutionChanger.METHOD_ROOT)
                 }else{
                     actionCheckPermissionButton(methodId)
                 }
@@ -60,7 +60,7 @@ class SelectMethodResolutionChangerFragment : Fragment() {
 
             R.id.rb_working_adb -> {
                 if(statusPermissionADB == true){
-                    actionNextButton()
+                    actionNextButton(ResolutionChanger.METHOD_ADB)
                 }else{
                     actionCheckPermissionButton(methodId)
                 }
@@ -72,9 +72,20 @@ class SelectMethodResolutionChangerFragment : Fragment() {
 
     }
 
-    private fun actionNextButton(){
-        requireContext().showToast("Next Clicked")
+    private fun actionNextButton(workingMode: String){
+        saveWorkingMode(workingMode)
+
+        val mainResolutionChangerFragment = MainResolutionChangerFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.resolution_changer_fragment, mainResolutionChangerFragment)
+            .commit()
     }
+
+
+    private fun saveWorkingMode(workingMode:String){
+        viewModel.saveWorkingMode(workingMode)
+    }
+
 
     private fun actionCheckPermissionButton(selectedMethodId : Int){
         showLoadingCheckPermission()
