@@ -73,7 +73,11 @@ class SelectMethodResolutionChangerFragment : Fragment() {
     }
 
     private fun actionNextButton(){
-        requireContext().showToast("Next Clicked")
+        val mainResolutionChangerFragment = MainResolutionChangerFragment()
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.resolution_changer_fragment, mainResolutionChangerFragment)
+            .commit()
     }
 
     private fun actionCheckPermissionButton(selectedMethodId : Int){
